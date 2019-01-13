@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <title>Transfer Spotify songs to KKBOX</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+</head>
+
+
+<!-- 目前做到： 特定 user 歌單抓出來。下一部要把 歌單 show 出來讓 customer 選，再進行抓歌-->
+<body>
+    <div class="col-md-12">
+       <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+
+                <div class="col-md-3 divOfButtons">
+                    <a href="/loginSPO">
+                        <button type="button" class="btn btn-outline-info custom_btn spoAuthBtn">
+                            Spotify Authorize !
+                        </button> 
+                    </a> <br> 
+
+                    <div class="showSpotifyBtn">
+                        <input type="text" name="numOfSongs" id="numOfSongs" placeholder="How many songs">
+                        <br><br>
+                        <button type="button" id ="spotify_saved_tracks" class="btn custom_btn">
+                            Get Saved Songs     
+                        </button> <br> 
+                        <button type="button" id="show_playlists" class="btn custom_btn">
+                            Show your/other's Playlist    
+                        </button> <br> 
+                        <input type="text" name="username" id="spo_user_id" placeholder="user Id" >
+                        <br><br>
+                        <button type="button" id="get_playlist_songs" class="btn custom_btn">
+                            Get Playlist Songs   
+                        </button> 
+                    </div>
+
+                    <a href="/loginKK">
+                        <button type="button" class="btn btn-outline-info custom_btn kkAuthBtn">
+                            KKBOX Authorize !
+                        </button> 
+                    </a> <br>  
+
+                    <div class="showKkboxBtn">
+                        <button type="button" id="add_to_kkbox" class="btn btn-outline-info custom_btn">
+                            Add to KKBOX !
+                        </button>
+                    </div>
+                    
+                </div>
+
+                <div class="col-md-7">
+                    <div class="jumbotron showResult">
+                        <h3 class="messageOfResult"></h3>
+                        <p></p>
+                    </div>
+                    <div id="dialog-message"></div>
+                </div>
+
+                
+
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>
+<!--
+sessionStorage.setItem("session_spotify_token",new_access_token)
+var spotify_access_token = sessionStorage.getItem("session_spotify_token");
+-->
+
+
+ 

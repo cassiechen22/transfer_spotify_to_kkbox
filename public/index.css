@@ -1,0 +1,56 @@
+body {
+	background-color: #f5efe2;
+	padding: 10% 2% 10% 2%;
+	overflow: hidden;
+}
+
+a{
+	color: black;
+}
+a:hover{
+	text-decoration: none;
+}
+
+.container {
+	display: block;
+	overflow: auto;
+	background-color: #c48f6c;
+	padding: 5%;
+}
+
+.divOfButtons {
+ 
+}
+
+input {
+	outline: none;
+}
+
+
+.custom_btn.custom_btn.custom_btn.custom_btn.custom_btn.custom_btn {
+	outline: none;
+	display: block;
+}
+
+
+#spo_login_successfully, #kk_login_successfully, #getKKAccessToken, .showSpotifyBtn, .showKkboxBtn {
+display: none;
+}
+
+.showResult{
+	padding: 5%;
+	width: 100%;
+	height: 330px;
+	overflow: scroll;
+	line-height: 1.6;
+	font-family: 'Karla', sans-serif;
+}
+
+#dialog-message {
+	display: none;
+}
+
+/*.br{
+    margin-top: 3%;
+    margin-bottom: 2%;
+}*/
