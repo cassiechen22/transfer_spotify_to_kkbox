@@ -43,38 +43,29 @@ function defaultOauth(){
             if (access_tokens == null) {
                 alert("Please click Authorize button first!")
             } else {
-                // if (localStorage.getItem("login") !== null || localStorage.getItem("login") > 1) {
-                //     clearSession()
-                // } else {
-                    var split = access_tokens.indexOf('@')
-                    kkbox_access_token = access_tokens.substring(0,split)
-                    spotify_access_token = access_tokens.substring(split+1, access_tokens.length)
-                    localStorage.setItem('local_kkbox_token' , kkbox_access_token)
-                    localStorage.setItem('local_spotify_token' , spotify_access_token)
-                    console.log('kkbox_access_token:' + kkbox_access_token);
-                    console.log('spotify_access_token:' + spotify_access_token);
+                var split = access_tokens.indexOf('@')
+                kkbox_access_token = access_tokens.substring(0,split)
+                spotify_access_token = access_tokens.substring(split+1, access_tokens.length)
+                console.log('kkbox_access_token:' + kkbox_access_token);
+                console.log('spotify_access_token:' + spotify_access_token);
 
-                    if (kkbox_access_token !== '' && kkbox_access_token !== 'null') {
-                        $('.kkAuthBtn').hide();
-                        $('.messageOfResult').html("Login KKBOX successfully")
-                    } 
+                if (kkbox_access_token !== '' && kkbox_access_token !== 'null') {
+                    $('.kkAuthBtn').hide();
+                    $('.messageOfResult').html("Login KKBOX successfully")
+                } 
 
-                    if (spotify_access_token !== '' && spotify_access_token !== 'null') {
-                        $('.spoAuthBtn').hide();
-                        $('.messageOfResult').html("Login Spotify successfully")
-                    } 
+                if (spotify_access_token !== '' && spotify_access_token !== 'null') {
+                    $('.spoAuthBtn').hide();
+                    $('.messageOfResult').html("Login Spotify successfully")
+                } 
 
-                    if (kkbox_access_token !== '' && spotify_access_token !== '' && kkbox_access_token !== 'null' && spotify_access_token !== 'null'){
-                        $('.showKkboxBtn').show();
-                        $('.showSpotifyBtn').show();
-                        $('.messageOfResult').html("Login KKBOX and Spotify successfully!")
-                    }
+                if (kkbox_access_token !== '' && spotify_access_token !== '' && kkbox_access_token !== 'null' && spotify_access_token !== 'null'){
+                    $('.showKkboxBtn').show();
+                    $('.showSpotifyBtn').show();
+                    $('.messageOfResult').html("Login KKBOX and Spotify successfully!")
+                }
 
-                    authorize +=1
-                    localStorage.setItem("login",authorize) //正常會==1
-                    console.log(localStorage.getItem("login"))
-                    
-                // }
+                authorize +=1
             }
         }); 
 }
@@ -123,7 +114,7 @@ $("#spotify_saved_tracks").click(function() {
 
 }); 
 
-// 缺成功的 dialog!
+
 var tracksInfo_array = new Array();
 var getSavedSongs = 0
 
@@ -159,29 +150,9 @@ function getSpotifySongs(limit,offset){
     }); 
 }
 
-// function showAddtoKkboxDialog(){
-//     $('#dialog-message').appendTo('.col-md-7')
-//                     .html('<div><h5> Get Spotify songs End! Please click Add to KKBOX! </h5></div>')
-//                     .dialog({
-//                         modal: true, title: 'Success!', zIndex: 10000, autoOpen: true,
-//                         width: 'auto', resizable: false,
-//                         buttons: {
-//                             OK: function(){
-//                                 $(this).remove();
-//                             }
-//                         },
-//                         close: function (event, ui) {
-//                             $(this).remove();
-//                         }
-//                     });
-// }
 
-
-
-// 列出 playlist 把想轉過去的歌單 點擊 -> 回傳 -> 再去轉成歌曲
 
 $('#show_playlists').click(getPlaylist);
-
 
 var idsOfPlaylist = new Array();
 var totalTracks = 0
@@ -317,7 +288,6 @@ function getKkboxTrackId(track_addToKK, tryCount = 0, retryLimit = 3){
                 if (retrySearch > 3) {
                     var accuracy = (tracksInfo_array.length - tracksIdOfKKbox.length)/tracksInfo_array.length
                     if (accuracy < 0.7) {
-                        // accuracyDialog(accuracy)
                     }
                 }
             }

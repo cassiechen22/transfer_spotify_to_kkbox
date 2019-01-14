@@ -1,1 +1,1 @@
-web: node authorization_code/app.js
+web: node app.js

@@ -40,9 +40,9 @@ app.use(express.static(__dirname + '/public'))
 
 
 app.get('/loginSPO', function(req, res) {
-  if(sessionStorage.getItem("spotify_access_token")!==null){
-    sessionStorage.removeItem("spotify_access_token");
-  }
+  // if(sessionStorage.getItem("spotify_access_token")!==null){
+  //   sessionStorage.removeItem("spotify_access_token");
+  // }
   var state = generateRandomString(16);
   res.cookie(stateKey, state); //將 state Random產生的值 加入 spotify_auth_state 這個 cookie 
 
@@ -60,9 +60,9 @@ app.get('/loginSPO', function(req, res) {
 
 
 app.get('/callback', function(req, res) {
-if(sessionStorage.getItem("spotify_access_token")!==null){
-    sessionStorage.removeItem("spotify_access_token");
-  }
+// if(sessionStorage.getItem("spotify_access_token")!==null){
+//     sessionStorage.removeItem("spotify_access_token");
+//   }
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null; 
@@ -112,9 +112,9 @@ if(sessionStorage.getItem("spotify_access_token")!==null){
 
 
 app.get('/loginKK', function(req, res) {
-  if(sessionStorage.getItem("kkbox_access_token")!==null){
-    sessionStorage.removeItem("kkbox_access_token");
-  }
+  // if(sessionStorage.getItem("kkbox_access_token")!==null){
+  //   sessionStorage.removeItem("kkbox_access_token");
+  // }
   var scope = 'user_profile user_territory user_account_status';
   var state = '123'
 
@@ -130,9 +130,9 @@ app.get('/loginKK', function(req, res) {
 
 
 app.get('/kkboxcallback', function(req, res) {
-if(sessionStorage.getItem("kkbox_access_token")!==null){
-    sessionStorage.removeItem("kkbox_access_token");
-  }
+// if(sessionStorage.getItem("kkbox_access_token")!==null){
+//     sessionStorage.removeItem("kkbox_access_token");
+//   }
   var code = req.query.code || null;
   var state = req.query.state || null;
   var scope = 'user_profile user_territory user_account_status';
@@ -246,5 +246,7 @@ app.post('/clearSession', function(req,res){
   sessionStorage.clear();
 });
 
-console.log('Listening on 8888');
-app.listen(8888);
+var port = Number(process.env.PORT || 8888);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
