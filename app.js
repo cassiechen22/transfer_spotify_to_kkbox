@@ -8,12 +8,12 @@ const bodyParser = require('body-parser');
 
 const spo_client_id = '4141e38ed62447aa9d31af1521cbcac0';
 const spo_client_secret = '9fed0c2bef604b5584c67cd0a81d5d95';
-const spo_redirect_uri = 'http://localhost:8888/callback/'; //'https://transfer-songs-to-kkbox.herokuapp.com/callback/'; //
+const spo_redirect_uri = 'https://transfer-songs-to-kkbox.herokuapp.com/callback/'; //'http://localhost:8888/callback/'; //
 const grant_type = 'authorization_code';
 
 const kk_client_id = 'dd9ffc35583e898d692477d0317c04ec';
 const kk_client_secret = '1eb1e2e5ece321db1691cdbd7fc1a194';
-const kk_redirect_uri = 'http://localhost:8888/kkboxcallback'; //'https://transfer-songs-to-kkbox.herokuapp.com/kkboxcallback'; //
+const kk_redirect_uri = 'https://transfer-songs-to-kkbox.herokuapp.com/kkboxcallback'; //'http://localhost:8888/kkboxcallback'; //
 
 const generateRandomString = function (length) {
     let text = '';
