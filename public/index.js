@@ -77,7 +77,6 @@ function getLimit(totalSongs, action) {
 
 
 $("#spotify_saved_tracks").click(function () {
-
     numOfSongs = document.getElementById('numOfSongs').value;
     getLimit(numOfSongs, getSpotifySongs);
     authorize += 1;
@@ -313,5 +312,53 @@ function addIntoKkboxFavorite(tracksId) {
 
 }
 
+
+let totalFavoriteSongs = 0
+$('#get_kkbox_songs').click(function () {
+    const kkbox_access_token = getCookie('kk_access_token');
+
+    // get total songs
+    $.ajax({
+        url: 'https://api.kkbox.com/v1.1/me/favorite?limit=1',
+        headers: {
+            'Authorization': 'Bearer ' + kkbox_access_token
+        },
+    }).error(function () {
+        alert("Please click Authorize button!")
+    }).done(function (response) {
+
+        totalFavoriteSongs = response.summary.total;
+        console.log(totalFavoriteSongs)
+        getLimit(totalFavoriteSongs, get_kkbox_songs);
+    });
+});
+
+function get_kkbox_songs(limit, offset) {
+    const kkbox_access_token = getCookie('kk_access_token');
+
+    $.ajax({
+        url: 'https://api.kkbox.com/v1.1/me/favorite?limit=' + limit + '&offset=' + offset,
+        headers: {
+            'Authorization': 'Bearer ' + kkbox_access_token
+        },
+    }).error(function () {
+        alert("Please click Authorize button!")
+    }).done(function (response) {
+        const favoriteTracks = response.data
+        console.log(favoriteTracks)
+
+        for (i = 0; i < favoriteTracks.length; i++) {
+            const track_name = favoriteTracks[i].name;
+            const artist_name = favoriteTracks[i].album.artist.name;
+
+            console.log("Track:" + track_name );
+            $(".showResult").append("<span>" + artist_name + ' - ' +  track_name + "</span><br>");
+        }
+    });
+    // const numOfSongs =
+    // getLimit(numOfSongs, getSpotifySongs);
+    // authorize += 1;
+    // sessionStorage.setItem("authorize", authorize)
+}
 
 
