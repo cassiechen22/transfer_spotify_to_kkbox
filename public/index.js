@@ -149,7 +149,7 @@ function getPlaylist(user_id) {
             'Authorization': 'Bearer ' + spotify_access_token
         },
     }).error(function (result) {
-        alert("Please click Authorize button first!")
+        alert("Please enter user_id or authorize again.")
     }).done(function (response) {
         const playlists = response.items;
 
@@ -304,16 +304,18 @@ function addIntoKkboxFavorite(tracksId) {
                 addIntoKkboxFavorite(tracksId)
             }
         }).error(function (response) {
-            console.log(response);
+            // console.log(response);
             addIntoKkboxFavorite(tracksId)
         })
+    } else {
+        alert("Add into your KKBOX successfully!")
     }
 
 
 }
 
 
-let totalFavoriteSongs = 0
+let totalFavoriteSongs = 0;
 $('#get_kkbox_songs').click(function () {
     const kkbox_access_token = getCookie('kk_access_token');
 
@@ -324,11 +326,11 @@ $('#get_kkbox_songs').click(function () {
             'Authorization': 'Bearer ' + kkbox_access_token
         },
     }).error(function () {
-        alert("Please click Authorize button!")
+        alert("Really? Do your KKBOX favorite contain any songs? If do not, you can use buttons below to help you add songs.")
     }).done(function (response) {
 
         totalFavoriteSongs = response.summary.total;
-        console.log(totalFavoriteSongs)
+        console.log(totalFavoriteSongs);
         getLimit(totalFavoriteSongs, get_kkbox_songs);
     });
 });
@@ -342,23 +344,19 @@ function get_kkbox_songs(limit, offset) {
             'Authorization': 'Bearer ' + kkbox_access_token
         },
     }).error(function () {
-        alert("Please click Authorize button!")
+        alert("Really? Do your KKBOX favorite contain any songs? If do not, you can use buttons below to help you add songs.")
     }).done(function (response) {
-        const favoriteTracks = response.data
-        console.log(favoriteTracks)
+        const favoriteTracks = response.data;
+        console.log(favoriteTracks);
 
         for (i = 0; i < favoriteTracks.length; i++) {
             const track_name = favoriteTracks[i].name;
             const artist_name = favoriteTracks[i].album.artist.name;
 
             console.log("Track:" + track_name );
-            $(".showResult").append("<span>" + artist_name + ' - ' +  track_name + "</span><br>");
+            $(".showResult").prepend("<span>" + artist_name + ' - ' +  track_name + "</span><br>");
         }
     });
-    // const numOfSongs =
-    // getLimit(numOfSongs, getSpotifySongs);
-    // authorize += 1;
-    // sessionStorage.setItem("authorize", authorize)
 }
 
 
