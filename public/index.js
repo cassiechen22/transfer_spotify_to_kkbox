@@ -65,13 +65,13 @@ function getCookie(cname) {
 let numOfSongs = 0;
 
 function getLimit(totalSongs, action) {
-    let limit = 50;
+    let limit = 10;
 
-    for (i = 0; i < totalSongs; i += 50) {
-        if ((totalSongs - i) < 50) {
+    for (i = 0; i < totalSongs; i += 10) {
+        if ((totalSongs - i) < 10) {
             limit = totalSongs - i; // rest of times
         }
-        action(limit, i + 1)
+        action(limit, i)
     }
 }
 
