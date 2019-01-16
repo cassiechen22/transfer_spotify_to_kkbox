@@ -6,10 +6,8 @@ let authorize = 0;
 $(window).bind('beforeunload', function () {
     if (authorize >= 1) {
         logout();
-
     }
 });
-
 
 
 $("#logout").click(logout);
@@ -21,8 +19,7 @@ function logout() {
         async: false
     }).done(function (response) {
         console.log(response);
-        window.location.href = "/";
-        location.reload();
+        window.location = "/";
     }).error(function (response) {
         console.log(response)
     })
@@ -32,13 +29,13 @@ function logout() {
 if (document.cookie.indexOf('spo_access_token') !== -1) {
     $('.spoAuthBtn').hide();
     spotify_access_token = getCookie('spo_access_token');
-    console.log(spotify_access_token)
+    // console.log(spotify_access_token)
 }
 
 if (document.cookie.indexOf('kk_access_token') !== -1) {
     $('.kkAuthBtn').hide();
     kkbox_access_token = getCookie('kk_access_token');
-    console.log(kkbox_access_token)
+    // console.log(kkbox_access_token)
 }
 
 if (document.cookie.indexOf('kk_access_token') !== -1 && document.cookie.indexOf('spo_access_token') !== -1) {
@@ -80,11 +77,11 @@ function getLimit(totalSongs, action) {
 
 
 $("#spotify_saved_tracks").click(function () {
+
     numOfSongs = document.getElementById('numOfSongs').value;
     getLimit(numOfSongs, getSpotifySongs);
     authorize += 1;
     sessionStorage.setItem("authorize", authorize)
-
 });
 
 
