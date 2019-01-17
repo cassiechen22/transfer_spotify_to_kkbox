@@ -247,6 +247,7 @@ function getKkboxTrackId(track_addToKK, tryCount = 0, retryLimit = 3) {
         if (tracksDataOfresponse.length === 0) {
             console.log("No Response: " + tracksDataOfresponse);
         } else {
+            console.log(tracksDataOfresponse[0]);
             const trackIdd = tracksDataOfresponse[0].id;
             console.log(trackIdd);
             tracksIdOfKKbox.push(trackIdd);
@@ -254,8 +255,11 @@ function getKkboxTrackId(track_addToKK, tryCount = 0, retryLimit = 3) {
 
             // 在 spotify 拿到歌曲 - kk search 得到 trackId 的歌曲 相減 不大於5
             if (tracksInfo_array.length - tracksIdOfKKbox.length < 5) {
+                console.log("oooooooooooooooooooooo");
                 addIntoKkboxFavorite(tracksIdOfKKbox)
             } else {
+                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
                 searchInKkbox();
                 retrySearch += 1;
 
@@ -274,7 +278,6 @@ function getKkboxTrackId(track_addToKK, tryCount = 0, retryLimit = 3) {
             return;
         }
         console.log(response);
-        return;
     })
 }
 
@@ -283,7 +286,6 @@ function addIntoKkboxFavorite(tracksId) {
     if (tracksId.length !== 0) {
         const kk_access_token = getCookie('kk_access_token');
         const aTrackId = tracksId[0];
-        console.log(aTrackId);
 
         $.ajax({
             type: 'POST',
@@ -294,24 +296,19 @@ function addIntoKkboxFavorite(tracksId) {
             },
             dataType: 'json'
         }).done(function (response) {
+            // let theTrackId = (response.track_id);
             if (response.error) {
                 console.log("Try Again!!!");
                 addIntoKkboxFavorite(tracksId)
             } else if (response.message === "Success") {
-                console.log(response);
-                $(".showResult").prepend("<span>" + JSON.stringify(response) + "</span>");
                 tracksId.shift();
-                addIntoKkboxFavorite(tracksId)
+                addIntoKkboxFavorite(tracksId);
+                $(".showResult").prepend("<span>" + JSON.stringify(response) + "</span>");
             }
-        }).error(function (response) {
-            // console.log(response);
+        }).error(function () {
             addIntoKkboxFavorite(tracksId)
-        })
-    } else {
-        alert("Add into your KKBOX successfully!")
+        });
     }
-
-
 }
 
 
@@ -336,6 +333,7 @@ $('#get_kkbox_songs').click(function () {
 });
 
 function get_kkbox_songs(limit, offset) {
+    $(".showResult").html("");
     const kkbox_access_token = getCookie('kk_access_token');
 
     $.ajax({
@@ -353,8 +351,8 @@ function get_kkbox_songs(limit, offset) {
             const track_name = favoriteTracks[i].name;
             const artist_name = favoriteTracks[i].album.artist.name;
 
-            console.log("Track:" + track_name );
-            $(".showResult").prepend("<span>" + artist_name + ' - ' +  track_name + "</span><br>");
+            console.log("Track:" + track_name);
+            $(".showResult").prepend("<span>" + artist_name + ' - ' + track_name + "</span><br>");
         }
     });
 }
